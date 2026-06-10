@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Savannah Uncovered — a student podcast series exploring the history, culture, health, and community of Savannah, Georgia. Created by the Honors Savannah Scholars.">
+  <meta name="keywords" content="Savannah podcast, Honors Savannah Scholars, student podcast, Savannah history, Georgia Southern, Savannah culture">
+  <title>Savannah Uncovered — Hidden Stories, Student Discoveries</title>
+  <meta name="google-site-verification" content="DTHTBplD4tMj4HpgXNNRNFXLS3kLNg-5pdODmgrNgZY" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #1a2e1a;
+      --green-mid: #2d4f2d;
+      --green-accent: #4a7c5a;
+      --green-light: #d4ecd4;
+      --green-pale: #edf4ed;
+      --purple: #7a4fa0;
+      --purple-light: #c9a8e8;
+      --cream: #f7f9f6;
+      --text: #2C2C2A;
+      --text-muted: #5F5E5A;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,46,26,0.97);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 58px;
+      border-bottom: 1px solid rgba(74,124,90,0.3);
+    }
+    .nav-brand {
+      font-family: 'Special Elite', serif;
+      color: var(--green-light); font-size: 17px; letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(212,236,212,0.7); font-size: 13px; text-decoration: none;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green-light); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--green-light); margin: 4px 0; transition: 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--green-dark);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(74,124,90,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(122,79,160,0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-logo {
+      width: 170px; height: 170px; border-radius: 18px;
+      object-fit: cover; border: 2px solid rgba(74,124,90,0.5);
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 {
+      font-family: 'Special Elite', serif;
+      font-size: clamp(42px, 8vw, 72px);
+      color: var(--green-light); line-height: 1.1;
+      margin-bottom: 0.6rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-tagline {
+      font-family: 'Special Elite', serif;
+      font-size: clamp(16px, 3vw, 22px);
+      color: var(--purple-light);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: rgba(212,236,212,0.8);
+      max-width: 560px; line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .btn-primary {
+      background: var(--green-accent); color: var(--green-light);
+      border: none; padding: 12px 26px; border-radius: 6px;
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px; font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #3d6b4a; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--green-light);
+      border: 1.5px solid rgba(74,124,90,0.6);
+      padding: 12px 26px; border-radius: 6px;
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--green-accent); transform: translateY(-1px); }
+    .hero-scroll {
+      position: absolute; bottom: 2rem;
+      color: rgba(212,236,212,0.4); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      animation: pulse 2s infinite;
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 3rem; }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--green-accent); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Special Elite', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      color: var(--green-dark); line-height: 1.2;
+    }
+    .section-sub {
+      font-family: 'Crimson Pro', serif;
+      font-size: 18px; color: var(--text-muted); margin-top: 0.5rem;
+    }
+
+    /* EPISODES */
+    #episodes { background: var(--cream); }
+    .season-tabs {
+      display: flex; gap: 8px; margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .tab {
+      padding: 7px 20px; border-radius: 30px; font-size: 13px;
+      border: 1.5px solid var(--green-accent); background: transparent;
+      color: var(--green-accent); cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .tab.active { background: var(--green-dark); color: var(--green-light); border-color: var(--green-dark); }
+    .tab:hover:not(.active) { background: var(--green-pale); }
+
+    .season-block { display: none; }
+    .season-block.active { display: block; }
+
+    .season-label {
+      font-family: 'Special Elite', serif;
+      font-size: 13px; color: var(--green-light);
+      background: var(--green-dark);
+      display: inline-block; padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 1.5rem; letter-spacing: 0.04em;
+    }
+
+    .ep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .ep-card {
+      background: #fff;
+      border: 1px solid rgba(74,124,90,0.2);
+      border-radius: 12px; padding: 1.4rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .ep-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(26,46,26,0.1); }
+    .ep-header { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
+    .ep-num {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--green-dark); color: var(--green-light);
+      font-family: 'Special Elite', serif; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ep-meta { flex: 1; }
+    .ep-title {
+      font-size: 15px; font-weight: 500; color: var(--green-dark);
+      line-height: 1.4; margin-bottom: 3px;
+    }
+    .ep-hosts { font-size: 12px; color: var(--purple); font-family: 'Crimson Pro', serif; font-style: italic; }
+    .ep-question {
+      font-family: 'Crimson Pro', serif; font-style: italic;
+      font-size: 14px; color: var(--text-muted); margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .ep-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; flex: 1; margin-bottom: 14px; }
+    .ep-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .ep-tag {
+      font-size: 11px; background: var(--green-pale);
+      color: var(--green-dark); padding: 3px 12px; border-radius: 20px;
+    }
+    .ep-links { display: flex; gap: 8px; }
+    .ep-link {
+      font-size: 11px; color: var(--green-accent);
+      border: 1px solid var(--green-accent); padding: 4px 12px;
+      border-radius: 20px; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .ep-link:hover { background: var(--green-accent); color: #fff; }
+    .ep-expert {
+      font-size: 11px; color: var(--text-muted);
+      margin-bottom: 10px; line-height: 1.5;
+    }
+    .ep-expert strong { color: var(--text); }
+    .ep-video-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; background: #1a2e1a; color: #d4ecd4;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+    }
+
+    /* VIDEOS */
+    #videos { background: var(--green-dark); }
+    #videos .section-label { color: var(--green-accent); }
+    #videos .section-title { color: var(--green-light); }
+    #videos .section-sub { color: rgba(212,236,212,0.6); }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .video-card {
+      background: var(--green-mid);
+      border: 1px solid rgba(74,124,90,0.3);
+      border-radius: 12px; overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .video-card:hover { transform: translateY(-3px); }
+    .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .video-info { padding: 14px 16px; }
+    .video-title { font-size: 14px; font-weight: 500; color: var(--green-light); margin-bottom: 4px; }
+    .video-ep { font-size: 12px; color: var(--purple-light); font-family: 'Crimson Pro', serif; font-style: italic; }
+
+    /* PHOTOS */
+    #photos { background: var(--green-pale); }
+    .photo-intro {
+      font-family: 'Crimson Pro', serif; font-size: 18px;
+      color: var(--text-muted); margin-bottom: 2rem; max-width: 600px;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .photo-slot {
+      border-radius: 10px; overflow: hidden;
+      background: #d0e4d0;
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-placeholder {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; color: var(--green-accent); opacity: 0.6;
+      font-size: 13px; text-align: center; padding: 1rem;
+    }
+    .photo-placeholder svg { width: 32px; height: 32px; }
+
+    /* ABOUT */
+    #about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text h3 {
+      font-family: 'Special Elite', serif; font-size: 26px;
+      color: var(--green-dark); margin-bottom: 1rem;
+    }
+    .about-text p {
+      font-family: 'Crimson Pro', serif; font-size: 18px;
+      color: var(--text); line-height: 1.75; margin-bottom: 1rem;
+    }
+    .about-credit {
+      font-family: 'Special Elite', serif; font-size: 14px;
+      color: var(--purple); margin-top: 1.5rem;
+    }
+    .scholars-title {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .scholar-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .scholar-card {
+      background: var(--green-pale);
+      border-radius: 10px; padding: 14px 12px; text-align: center;
+    }
+    .scholar-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--green-dark); color: var(--green-light);
+      font-family: 'Special Elite', serif; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8px;
+    }
+    .scholar-name { font-size: 13px; font-weight: 500; color: var(--green-dark); margin-bottom: 2px; }
+    .scholar-season { font-size: 11px; color: var(--purple); font-family: 'Crimson Pro', serif; }
+    .scholar-detail { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--green-dark);
+      padding: 3rem 2rem; text-align: center;
+      border-top: 1px solid rgba(74,124,90,0.3);
+    }
+    .footer-logo {
+      font-family: 'Special Elite', serif; font-size: 22px;
+      color: var(--green-light); margin-bottom: 6px;
+    }
+    .footer-tagline {
+      font-family: 'Special Elite', serif; font-size: 14px;
+      color: var(--purple-light); margin-bottom: 8px;
+    }
+    .footer-credit { font-size: 13px; color: rgba(212,236,212,0.5); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute;
+        top: 58px; left: 0; right: 0; background: var(--green-dark);
+        padding: 1rem 2rem; gap: 1rem; border-bottom: 1px solid rgba(74,124,90,0.3); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .scholar-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Savannah Uncovered</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#episodes">Episodes</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-logo" src="logo.jpg" alt="Savannah Uncovered logo — a map of coastal Georgia with the title in typewriter font" />
+  <h1>Savannah Uncovered</h1>
+  <p class="hero-tagline">Hidden Stories, Student Discoveries</p>
+  <p class="hero-desc">A student-produced podcast series exploring the history, culture, health, and community of Savannah, Georgia — one conversation at a time.</p>
+  <div class="hero-btns">
+    <a href="https://open.spotify.com" class="btn-primary" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      Listen on Spotify
+    </a>
+    <a href="#videos" class="btn-outline">Watch Videos</a>
+  </div>
+  <span class="hero-scroll">↓ explore</span>
+</div>
+
+<!-- EPISODES -->
+<section id="episodes">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">The Podcast</p>
+      <h2 class="section-title">Episodes</h2>
+      <p class="section-sub">Three seasons of student-produced storytelling from the heart of Savannah</p>
+    </div>
+    <div class="season-tabs reveal">
+      <button class="tab active" onclick="showSeason('all', this)">All Seasons</button>
+      <button class="tab" onclick="showSeason('s1', this)">Season 1</button>
+      <button class="tab" onclick="showSeason('s2', this)">Season 2</button>
+      <button class="tab" onclick="showSeason('s3', this)">Season 3</button>
+    </div>
+
+    <!-- SEASON 1 -->
+    <div class="season-block active" id="block-s1">
+      <div class="season-label">Season 1</div>
+      <div class="ep-grid">
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">1</div>
+            <div class="ep-meta">
+              <p class="ep-title">Therapy Career Opportunities in Savannah</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Ansley, Abigail & Briana</p>
+            </div>
+          </div>
+          <p class="ep-question">"What career opportunities are available in Savannah for speech therapy and psychology majors?"</p>
+          <p class="ep-expert"><strong>Expert:</strong> Prof. Tory Candea, Director of Clinical Education, Communication Sciences and Disorders Program</p>
+          <p class="ep-desc">Ansley, Abigail, and Briana explore various ways college students can get job experience and internships in therapy and communication disorders in the Savannah area.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Health & Careers</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/3EscQe4WfAONtVoGCOmKLU" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">2</div>
+            <div class="ep-meta">
+              <p class="ep-title">Colonial Cemetery & Yellow Fever</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Matthew, Christian & Skyy</p>
+            </div>
+          </div>
+          <p class="ep-question">"What do the graves at Colonial Cemetery reveal about the history of epidemics in Savannah?"</p>
+          <p class="ep-expert"><strong>Expert:</strong> Dr. Jennifer Zettler, Professor of Biology</p>
+          <p class="ep-desc">Matthew, Christian, and Skyy explore the impact of Yellow Fever and Savannah's medical history through the lens of Colonial Cemetery's graves.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">History & Science</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/3cPctDE3X8082nd79Kc8LZ" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">3</div>
+            <div class="ep-meta">
+              <p class="ep-title">Trustees Garden in Context</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Cassandra, Abby & Kiara</p>
+            </div>
+          </div>
+          <span class="ep-video-badge">🎬 Videos available</span>
+          <p class="ep-question">"What plants did Georgia's earliest settlers try to grow and why?"</p>
+          <p class="ep-expert"><strong>Expert:</strong> Shawn Ferrer, Interpretive Ranger, Wormsloe State Historic Site</p>
+          <p class="ep-desc">Cassandra, Abby, and Kiara explore the Trustees Garden in its historical, biological, and pharmacological contexts, explaining how early colonists created a biological research center to find the right plants for Georgia soil.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">History & Nature</span>
+            <div class="ep-links">
+              <a href="https://open.spotify.com/episode/4ySa9k8MRFFsCRYJyC2Riq" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a>
+              <a href="https://youtu.be/LCEmh5oSqII" class="ep-link" target="_blank" rel="noopener noreferrer">Video</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEASON 2 -->
+    <div class="season-block active" id="block-s2" style="margin-top:3rem;">
+      <div class="season-label">Season 2</div>
+      <div class="ep-grid">
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">1</div>
+            <div class="ep-meta">
+              <p class="ep-title">The Impact of the Frank Callen Boys and Girls Club</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Zaniya, Dontavious, Sarah & Kelly</p>
+            </div>
+          </div>
+          <span class="ep-video-badge">🎬 Videos available</span>
+          <p class="ep-question">"What has the Frank Callen Boys and Girls Club done for the youth of Savannah?"</p>
+          <p class="ep-expert"><strong>Expert:</strong> Mr. Mark Lindsay, CEO, Frank Callen Boys and Girls Club</p>
+          <p class="ep-desc">Zaniya, Dontavious, Sarah, and Kelly examine the history and impact of the club on Savannah's young people over the years.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Community</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/0SgDpxBf4GjocCfYlyPrRp" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">2</div>
+            <div class="ep-meta">
+              <p class="ep-title">Coastal Georgia Chronicles: From Marshes to Monuments</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Kiara, Luke & Cassandra</p>
+            </div>
+          </div>
+          <p class="ep-question">"Wondering what to do around Savannah to learn more about the area?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Ranger Ellen Goza (Skidaway Island State Park); Dr. Cathy Sakas (retired NOAA Gray's Reef educator)</p>
+          <p class="ep-desc">The team explores Fort Pulaski, Gray's Reef, Skidaway Island State Park, and Wormsloe to help you understand the history and natural beauty of the Savannah coast.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Nature & History</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/755EsGdGOyMTzp6FlzjIZh" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">3</div>
+            <div class="ep-meta">
+              <p class="ep-title">Internationality Within Savannah</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Vanessa, Abie, KK & Daniel</p>
+            </div>
+          </div>
+          <p class="ep-question">"How has Savannah's global influence shaped its history and communities?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Dr. Christopher Hendricks; Ms. Laurely Caycho; Ms. Lescia Gonzalez Rivera</p>
+          <p class="ep-desc">The team covers Savannah's foreign-born population, immigration waves, and how different cultures have influenced the city's buildings, neighborhoods, and campus life.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Culture & History</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/2imwk6Rs07Be4qrazacNHZ" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">4</div>
+            <div class="ep-meta">
+              <p class="ep-title">Communication Connection Pt. 1: Speech-Language Pathology</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Ansley, Reese, Briana & Alexis</p>
+            </div>
+          </div>
+          <p class="ep-question">"What kinds of speech therapy offerings exist in Savannah?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Bethany Manning; Ansley Sellers; Mallory King; Ashlee Sitzler (Sonshine Therapy, Memorial Children's Hospital, Speech Clinic of the Coastal Empire, SoundStart)</p>
+          <p class="ep-desc">The team explores the area's speech-language pathology landscape across four unique settings, highlighting the passion and lived experiences that drive these professionals.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Health</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/1nGEO2htkSdMGtoo8TaNtB" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">5</div>
+            <div class="ep-meta">
+              <p class="ep-title">The Heartbeat of Savannah: Nursing at St. Joseph's/Candler Hospital</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Skyy, Gwyneth, Stephanie & Belle</p>
+            </div>
+          </div>
+          <p class="ep-question">"Curious about the history behind one of Savannah's most trusted healthcare institutions?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Dr. Sherry Danello, CNO; Dr. Meredith Scaccia, Mary Telfair Women's Hospital</p>
+          <p class="ep-desc">The team explores the St. Joseph's/Candler legacy from its origins as two separate hospitals to their 1997 merger, uncovering the story of Mary Telfair and the nation's first women's hospital.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Health & History</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/0rUuFnAeLfVQb0U7azT7Fx" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">6</div>
+            <div class="ep-meta">
+              <p class="ep-title">The Savannah Jazz Festival</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Abigail, Ashlea, Bryce & Christian</p>
+            </div>
+          </div>
+          <p class="ep-question">"What does the Savannah Jazz Festival mean to the city?"</p>
+          <p class="ep-expert"><strong>Expert:</strong> Professor Stephen Primatic, Gretsch School of Music</p>
+          <p class="ep-desc">The team covers the importance of this free festival — how it began, how it evolved, and what the future holds — and how it supports Savannah's history, tourism, and economy.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Music & Culture</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/29plC2HexsdRHWUdwtdyKH" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">7</div>
+            <div class="ep-meta">
+              <p class="ep-title">Interpreting Savannah's House Museums in the 21st Century</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Eva, Juliana & Samaya</p>
+            </div>
+          </div>
+          <p class="ep-question">"How are Savannah's historic house museums telling more complete stories about the past?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Kendall Graham, Historic Savannah Foundation; Danielle Hodes, Davenport House Museum</p>
+          <p class="ep-desc">The team examines how museums are moving beyond romanticized versions of the Old South to humanize forgotten voices — including the stories of enslaved individuals and Savannah's Chinese immigrant community.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">History & Culture</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/3G5bAZYR57VMWlJrsDj1WE" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEASON 3 -->
+    <div class="season-block active" id="block-s3" style="margin-top:3rem;">
+      <div class="season-label">Season 3</div>
+      <div class="ep-grid">
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">1</div>
+            <div class="ep-meta">
+              <p class="ep-title">Armstrong Before the Eagle</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Gwyneth, Belle & Stephanie</p>
+            </div>
+          </div>
+          <p class="ep-question">"What was the Armstrong campus like before it joined the university?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Alumna Gabby Giles; Professor Olavi Arens</p>
+          <p class="ep-desc">Gwyneth, Belle, and Stephanie explore the rich history of Armstrong State University, uncovering the campus's origins as a junior college in 1935 and painting a vivid picture of what the school was like before the merger.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Local History</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/0mgrlFm8VbT5HVlKyyNuA1" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">2</div>
+            <div class="ep-meta">
+              <p class="ep-title">International Cuisine Within Savannah</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Vanessa, Abie, KK & Daniel</p>
+            </div>
+          </div>
+          <p class="ep-question">"How do international flavors shape our cultural identity and enrich the Savannah community?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Mr. Stathy Stathopoulos, Yia Yia's Kitchen; Mr. Chand Sharma, Pakwan Indian Cuisine</p>
+          <p class="ep-desc">The team explores the city's global food scene, visiting Yia Yia's Kitchen, Pakwan Indian Cuisine, and Narra Tree Filipino restaurant to uncover the stories behind the menus.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Food & Culture</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/1bDrYDRXVfI3eh10ooFpMf" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">3</div>
+            <div class="ep-meta">
+              <p class="ep-title">Forsyth Park: Past, Present, and Future</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Cassandra, Kiara & Sarah</p>
+            </div>
+          </div>
+          <p class="ep-question">"How did Forsyth Park transform from a 19th-century city commons into Savannah's cultural heart?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Hugh Golson, local historian; Asia Harold, Executive Director, Forsyth Farmers' Market</p>
+          <p class="ep-desc">The team uncovers the park's origins, the evolution of its iconic fountain and landscape, and the modern events that actively build Savannah's community today.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">History & Nature</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/1WIH2ulYMs9xtRUJJTz9R3" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">4</div>
+            <div class="ep-meta">
+              <p class="ep-title">Communication Connection Pt. 2: Swallowing Disorders</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Ansley, Reese & Alexis</p>
+            </div>
+          </div>
+          <p class="ep-question">"How is modern technology transforming the treatment of speech and swallowing disorders?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Pamela Thompson; Amy VanderMay</p>
+          <p class="ep-desc">The team delves into how AAC tools and swallowing therapy technologies are utilized in Savannah, exploring how these advancements are improving the lives of patients across the city.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Health</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/20elXJzM1OHZ2fjwAJU1Ej" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+        <div class="ep-card reveal">
+          <div class="ep-header">
+            <div class="ep-num">5</div>
+            <div class="ep-meta">
+              <p class="ep-title">Sounds of the City: Plant Riverside & the Gretsch School of Music</p>
+              <p class="ep-hosts">Honors Savannah Scholars: Bryce, Christian & Abigail</p>
+            </div>
+          </div>
+          <p class="ep-question">"What links a historic power plant to a world-renowned instrument manufacturer?"</p>
+          <p class="ep-expert"><strong>Experts:</strong> Thomas Claxton, vocalist and producer; Angel Price Montgomery, student performer</p>
+          <p class="ep-desc">The team traces the transformation of the 1912 Savannah Electric Power Plant into a premier entertainment hub and examines how the Gretsch family champions music education, providing an essential space for students to perform and learn.</p>
+          <div class="ep-footer">
+            <span class="ep-tag">Music & Culture</span>
+            <div class="ep-links"><a href="https://open.spotify.com/episode/0brfIeSaziVz1Wrb8COjob" class="ep-link" target="_blank" rel="noopener noreferrer">Listen</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Field Footage</p>
+      <h2 class="section-title">Videos</h2>
+      <p class="section-sub">Behind-the-scenes and supplemental footage from the Honors Savannah Scholars</p>
+    </div>
+    <div class="video-grid">
+
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/LCEmh5oSqII" title="Trustees Garden field footage" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Trustees Garden — field footage</p>
+          <p class="video-ep">Season 1, Episode 3</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/R530VbD6W4Q" title="Frank Callen Boys and Girls Club visit" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Frank Callen Boys & Girls Club — full visit</p>
+          <p class="video-ep">Season 2, Episode 1</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/fHd8ATYrqbM" title="Frank Callen Club impact interview short" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Short: Club impact interview</p>
+          <p class="video-ep">Season 2, Episode 1</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/5r3IBxSLl6M" title="Frank Callen Club highlights short" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Short: Club highlights</p>
+          <p class="video-ep">Season 2, Episode 1</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/h935D4iuw3s" title="Trustees Garden short 1" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Short: Trustees Garden visit</p>
+          <p class="video-ep">Season 1, Episode 3</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/1XG8b9JHZ-0" title="Trustees Garden short 2" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-title">Short: Trustees Garden highlights</p>
+          <p class="video-ep">Season 1, Episode 3</p>
+        </div>
+      </div>
+
+      <!-- ADD MORE VIDEOS HERE — copy a video-card block above and replace the YouTube ID and title -->
+
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">Photos</h2>
+      <p class="section-sub">Images from the field, interviews, and campus — three seasons in the making</p>
+    </div>
+    <div class="photo-grid reveal">
+      <div class="photo-slot"><img src="podcast-team.jpg" alt="Savannah Uncovered podcast team"></div>
+      <div class="photo-slot"><img src="recording-studio.jpg" alt="Students in the recording studio"></div>
+      <div class="photo-slot"><img src="podcast-recording.jpg" alt="Students recording a podcast episode"></div>
+      <div class="photo-slot"><img src="girls-boys-club.jpg" alt="Visit to the Frank Callen Boys and Girls Club"></div>
+      <div class="photo-slot"><img src="nursing-recording.jpeg" alt="Nursing episode recording session"></div>
+      <div class="photo-slot"><img src="speech-therapy.jpg" alt="Speech therapy episode fieldwork"></div>
+      <div class="photo-slot"><img src="international-restaurant.png" alt="Visit to international restaurant, food and culture episode"></div>
+      <div class="photo-slot"><img src="yiayia-group.jpg" alt="Team at Yia Yia's Kitchen and Market Place"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">The Project</p>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h3>Honors Savannah Scholars</h3>
+        <p>Savannah Uncovered is a student-produced podcast series created by the Honors Savannah Scholars — students at Georgia Southern University's Armstrong Campus in Savannah. Each episode is researched, recorded, and produced by students exploring the city they call home — from its history and healthcare to its music, food, and the people who make it vibrant.</p>
+        <p>Our scholars interview local experts, visit historic sites, and bring Savannah's stories to a wider audience. The podcast is now in its third season, with fifteen episodes spanning topics from colonial botany and Yellow Fever to modern speech therapy, jazz, and international cuisine.</p>
+        <p>Every episode is a collaboration between curious students and generous community experts who share their knowledge and passion for this remarkable city.</p>
+        <p class="about-credit">A project of the Honors Savannah Scholars</p>
+      </div>
+      <div class="reveal">
+        <p class="scholars-title">Some of our scholars</p>
+        <div class="scholar-grid">
+          <div class="scholar-card">
+            <div class="scholar-avatar">Ca</div>
+            <p class="scholar-name">Cassandra</p>
+            <p class="scholar-season">Seasons 1, 2 & 3</p>
+          </div>
+          <div class="scholar-card">
+            <div class="scholar-avatar">Ki</div>
+            <p class="scholar-name">Kiara</p>
+            <p class="scholar-season">Seasons 1, 2 & 3</p>
+          </div>
+          <div class="scholar-card">
+            <div class="scholar-avatar">An</div>
+            <p class="scholar-name">Ansley</p>
+            <p class="scholar-season">Seasons 1, 2 & 3</p>
+          </div>
+          <div class="scholar-card">
+            <div class="scholar-avatar">Br</div>
+            <p class="scholar-name">Bryce</p>
+            <p class="scholar-season">Seasons 2 & 3</p>
+          </div>
+          <div class="scholar-card">
+            <div class="scholar-avatar">Gy</div>
+            <p class="scholar-name">Gwyneth</p>
+            <p class="scholar-season">Seasons 2 & 3</p>
+          </div>
+          <div class="scholar-card">
+            <div class="scholar-avatar">Va</div>
+            <p class="scholar-name">Vanessa</p>
+            <p class="scholar-season">Seasons 2 & 3</p>
+          </div>
+          <!-- Add more scholars here as you collect their profiles -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Savannah Uncovered</p>
+  <p class="footer-tagline">Hidden Stories, Student Discoveries</p>
+  <p class="footer-credit">A project of the Honors Savannah Scholars</p>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Season tabs
+  function showSeason(season, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const blocks = ['block-s1', 'block-s2', 'block-s3'];
+    blocks.forEach(id => {
+      const el = document.getElementById(id);
+      if (season === 'all') {
+        el.classList.add('active');
+        el.style.display = 'block';
+      } else {
+        const match = id === 'block-' + season;
+        el.style.display = match ? 'block' : 'none';
+      }
+    });
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
